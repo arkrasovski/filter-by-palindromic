@@ -20,7 +20,53 @@ namespace FilterByPalindromicTask
         /// </example>
         public static int[] FilterByPalindromic(int[]? source)
         {
-            throw new NotImplementedException("You need to implement this function.");
+            if (source == null)
+            {
+                throw new ArgumentNullException("Array can not be null.");
+            }
+
+            if (source.Length == 0)
+            {
+                throw new ArgumentException("Array can not be empty.");
+            }
+
+            int[] result = Array.Empty<int>();
+
+            foreach (int s in source)
+            {
+                if (IsPalindrom(s))
+                {
+                    Array.Resize(ref result, result.Length + 1);
+                    result[result.Length - 1] = s;
+                }
+            }
+
+            return result;
+        }
+
+        private static bool IsPalindrom(int number)
+        {
+            if (number < 0)
+            {
+                return false;
+            }
+
+            int copy_number = number;
+            int result = 0;
+            while (number != 0)
+            {
+                result = (result * 10) + (number % 10);
+                number = number / 10;
+            }
+
+            if (result == copy_number)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
